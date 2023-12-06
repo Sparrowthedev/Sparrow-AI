@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frank's AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="lightMode">
+    <div id="app">
+      <div class="navOverlay"></div>
+
+      <nav>
+        <div class="navContents">
+          <div class="navClose">
+            <i class="ph-x-circle"></i>
+          </div>
+          <div class="item activeItem topMargin">
+            <i class="ph-question"></i>
+            <p>Ask Me</p>
+          </div>
+          <div class="item">
+            <i class="ph-image"></i>
+            <p>Generate Images</p>
+          </div>
+        </div>
+        <div class="contact">
+          <a href="https://wa.me/+2348139362969" class="navBottom item">
+            <i class="ph-whatsapp-logo"></i>
+            <p>Let's Chat</p>
+          </a>
+          <a href="https://twitter.com/Frank_Dev007" class="navBottom item">
+            <i class="ph-twitter-logo"></i>
+            <p>Let's Tweet</p>
+          </a>
+          <a href="https://www.linkedin.com/in/franklin-chinedu/" class="navBottom item">
+            <i class="ph-linkedin-logo"></i>
+            <p>Let's Link Up</p>
+          </a>
+        </div>
+      </nav>
+
+      <div class="right" id="createCompletion">
+        <div class="navtoggler">
+          <p>Frank's AI.</p>
+          <div class="menuBar">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <div id="chatArea">
+          <div class="human">
+            <div class="humanIcon">
+              <i class="ph-user"></i>
+            </div>
+            <p class="humanRequest">Hello Bot &#128075;</p>
+          </div>
+
+          <div class="bot">
+            <div class="botIcon">
+              <i class="ph-robot"></i>
+            </div>
+            <p class="botAnswer">Hi, how may i be of help?</p>
+            <div class="copyBtn">
+              <i class="ph-copy" id="copyIcon"></i>
+            </div>
+          </div>
+        </div>
+
+        <form class="chatTextAndBtn">
+          <div class="promptArea">
+            <textarea id="textArea" name="prompt" placeholder="....Ask My Ai"></textarea>
+            <button type="submit" class="createCompletionBtn">Submit</button>
+          </div>
+          <div class="bottomText">
+            <p>Built with</p>
+            <i class="ph-heart"></i>
+            <p>by Frank</p>
+          </div>
+        </form>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      <!-- IMAGE CREATION PART -->
+      <div class="right" id="createImage">
+        <div class="navtoggler">
+          <p>Frank's AI.</p>
+          <div class="menuBar">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <div id="chatArea">
+          <div class="human">
+            <div class="humanIcon">
+              <i class="ph-user"></i>
+            </div>
+            <p class="humanImageRequest">Hello Bot &#128075;</p>
+          </div>
+
+          <div class="bot">
+            <div class="botIcon">
+              <i class="ph-robot"></i>
+            </div>
+            <span class="botImageLoader">Give a description of the image you want to generate</span>
+            <div class="imageContainer">
+              <!-- <div class="downloadBtn">
+                <box-icon name='download' color="#6E7681" size="sm" color="white"></box-icon>
+              </div> -->
+              <div class="imgCanvas">
+                <img class="botImageAnswer" src="" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="chatTextAndBtn">
+          <textarea id="textArea" name="prompt" placeholder="Ask My Ai"></textarea>
+          <button type="submit" class="handleImageGenerationBtn">Submit</button>
+          <div class="bottomText">
+            <p>Built with</p>
+            <i class="ph-heart"></i>
+            <p>by Frank</p>
+          </div>
+        </form>
+      </div>
+
+      <!--====== Modal-02 ======-->
+      <div class="modal">
+        <div class="modal_content">
+          <div class="modalClose">
+            <i class="ph-x-circle"></i>
+          </div>
+          <div class="modal_body">
+            <p>The input field cannot be left empty</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script>
+      console.log(document.querySelector("textarea"));
+
+      document.querySelector("textarea").addEventListener("keypress", function (event) {
+        if (event.ctrlKey === true) {
+          console.log("Ctrl Enter");
+        }
+      });
+    </script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
