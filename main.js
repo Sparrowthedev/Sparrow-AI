@@ -1,7 +1,7 @@
 // import "boxicons";
 const chatArea = document.getElementById("chatArea");
 const form = document.querySelector("form");
-const textarea = Array.from(document.getElementsByTagName("textarea"));
+const textarea = document.querySelectorAll("textarea");
 const humanRequest = document.querySelector(".humanRequest");
 const botAnswer = document.querySelector(".botAnswer");
 const botImageLoader = document.querySelector(".botImageLoader");
@@ -129,13 +129,6 @@ document.querySelector(".handleImageGenerationBtn").addEventListener("click", (e
   handleImageGeneration();
 });
 
-document.querySelector("textarea").addEventListener("keypress", function (event) {
-  if (event.ctrlKey === true) {
-    console.log("first");
-    handleCreateCompletion(event);
-  }
-});
-
 selectedItems.forEach((selectedItem, index) => {
   selectedItem.addEventListener("click", () => {
     selectedItems.forEach((unselectedBtn) => {
@@ -172,18 +165,11 @@ document.querySelector(".copyBtn").addEventListener("click", () => {
   document.querySelector("#copyIcon").style.color = "#10A37F";
 });
 
+textarea.forEach(function(textarea) {
+  textarea.addEventListener("input", function() {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  });
+});
 
-// Automatically grow a text area on typing
-for (let i = 0; i < textarea.length; i++) {
-  textarea[i].setAttribute("style", "height:" + (textarea[i].scrollHeight) + "px; overflow-y:auto;");
-  textarea[i].addEventListener("input", OnInput, false);
-}
 
-function OnInput() {
-  this.style.height = 0;
-  if(this.scrollHeight >= 192) {
-    this.style.height = "192px"
-    return
-  }
-  this.style.height = (this.scrollHeight) + "px";
-}
