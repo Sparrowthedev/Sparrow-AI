@@ -12,9 +12,13 @@ const createImagePage = document.getElementById("createImage");
 const createCompletionPage = document.getElementById("createCompletion");
 const createImageText = document.querySelector("#createImage #textArea");
 const modal = document.querySelector(".modal");
+const downloadCon = document.querySelector('#downloadCon');
+const downloadButton = document.getElementById('downloadButton');
+
 const modalClose = document.querySelector(".modalClose").addEventListener("click", () => {
   modal.classList.remove("open");
 });
+
 
 let loadInterval;
 
@@ -49,7 +53,6 @@ async function handleCreateCompletion(e) {
   })
 
   const formData = new FormData(form);
-  console.log(textarea);
   form.reset();
   if (!formData.get("prompt")) {
     modal.classList.add("open");
@@ -63,7 +66,7 @@ async function handleCreateCompletion(e) {
   humanRequest.textContent = formData.get("prompt");
 
   chatArea.scrollTop = chatArea.scrollHeight;
-  const response = await fetch("https://frankai.onrender.com/openai/chatGptClone", {
+  const response = await fetch("https://sparrow-ai.onrender.com/openai/chatGptClone", {
     method: "POST",
     body: JSON.stringify({
       prompt: formData.get("prompt"),
@@ -74,15 +77,17 @@ async function handleCreateCompletion(e) {
   });
 
   const { data } = await response.json();
+  const message = data.message.content;
+  console.log(message);
   if (response.ok) {
     clearInterval(loadInterval);
-    botTyping(botAnswer, data.trim());
-    console.log(data.trim());
+    botTyping(botAnswer, message.trim());
   } else {
     clearInterval(loadInterval);
     botTyping(botAnswer, "Oops!! something went wrong. Please try again later");
   }
 }
+
 
 async function handleImageGeneration() {
   if (!createImageText.value) {
@@ -98,7 +103,7 @@ async function handleImageGeneration() {
 
   console.log(createImageText.value);
   chatArea.scrollTop = chatArea.scrollHeight;
-  const response = await fetch("https://frankai.onrender.com/openai/imageGeneration", {
+  const response = await fetch("https://sparrow-ai.onrender.com/openai/imageGeneration", {
     method: "POST",
     body: JSON.stringify({
       prompt: createImageText.value,
@@ -111,11 +116,19 @@ async function handleImageGeneration() {
   createImageText.value = "";
 
   const { data } = await response.json();
-  console.log(response);
   if (response.ok) {
     clearInterval(loadInterval);
     botImageAnswer.src = data;
-    console.log(data);
+    downloadCon.style.display = 'block'
+    function downloadImage() {
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'image.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    downloadButton.addEventListener('click', downloadImage);
   } else {
     clearInterval(loadInterval);
     botTyping(botImageLoader, "Oops!! something went wrong. Please try again later");

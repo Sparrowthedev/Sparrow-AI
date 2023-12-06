@@ -290,6 +290,7 @@ i {
 .imageContainer {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .downloadBtn,
@@ -377,3 +378,22 @@ i {
     width: 60%;
   }
 }
+
+.downloadButton {
+  background-color: #10A37F;
+  padding: 10px;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#downloadCon {
+  position: absolute;
+  right: -60px;
+  display: none;
+}
+
