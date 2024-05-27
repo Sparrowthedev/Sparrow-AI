@@ -66,6 +66,8 @@ async function handleCreateCompletion(e) {
   humanRequest.textContent = formData.get("prompt");
 
   chatArea.scrollTop = chatArea.scrollHeight;
+  // https://sparrow-ai.onrender.com/openai/chatGptClone
+  // http://localhost:3000/openai/chatGptClone
   const response = await fetch("https://sparrow-ai.onrender.com/openai/chatGptClone", {
     method: "POST",
     body: JSON.stringify({
@@ -103,6 +105,8 @@ async function handleImageGeneration() {
 
   console.log(createImageText.value);
   chatArea.scrollTop = chatArea.scrollHeight;
+  // https://sparrow-ai.onrender.com/openai/imageGeneration
+  // http://localhost:3000/openai/imageGeneration
   const response = await fetch("https://sparrow-ai.onrender.com/openai/imageGeneration", {
     method: "POST",
     body: JSON.stringify({
